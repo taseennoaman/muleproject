@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="b364eb6b-6e0e-4692-958b-3a7e5df4f189" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="fileFlow" doc:id="1cb5f828-661c-4b79-a6d8-b1a887029079" >
+		<http:listener doc:name="Listener" doc:id="f7b2e2d0-7e4d-4ae6-a4e9-674f550aea7c" config-ref="HTTP_Listener_config" path="file"/>
+		<logger level="INFO" doc:name="Logger" doc:id="ba166734-46a4-441e-88de-2c616b8205b6" message="hi"/>
+		<logger level="INFO" doc:name="Logger" doc:id="4dab64b8-5ca4-402f-a4b1-185518a84fda" message="hi second"/>
+		<flow-ref doc:name="Flow Reference" doc:id="cd85c9ab-1657-477f-be84-6c8f8c323f25" name="fileSub_Flow"/>
+	</flow>
+	<sub-flow name="fileSub_Flow" doc:id="1e0ca808-379c-4371-9554-fc52bfbda779" >
+		<logger level="INFO" doc:name="Logger" doc:id="aa82aec9-4955-4ccc-8323-34b52e91143e" message="i am in subflow"/>
+	</sub-flow>
+</mule>
